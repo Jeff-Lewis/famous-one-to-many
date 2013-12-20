@@ -7,6 +7,6 @@ define(
 	], 
 	function (t, i, e) 
 	{
-        e.exports = 1004
+        e.exports = 1002
     }
 );
