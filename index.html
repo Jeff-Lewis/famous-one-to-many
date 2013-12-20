@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>    
+    <script type="text/javascript" src="/lib/require.js"></script>
+    <script type="text/javascript" src="/lib/famous.js"></script>
+
+    <link href="styles/famous.css" type="text/css" rel="stylesheet"/>
+    <link href="styles/ui.css" type="text/css" rel="stylesheet"/>
+	<link href="styles/fonts.css" type="text/css" rel="stylesheet"/>
+	<link href="styles/famous-signup.css" type="text/css" rel="stylesheet"/>
+    <link href="styles/tiled.css" type="text/css" rel="stylesheet"/>
+
+    <base href="http://demo.famo.us/one-to-many/" />
+</head>
+<body>
+<script type="text/javascript">
+
+Famous(function(require, exports, module) 
+{   
+	require('famous-sync/FastClick');
+    // Engine
+    var Engine           = require('famous/Engine');
+    var FM               = require('famous/Matrix');
+    var RenderNode       = require('famous/RenderNode');
+    var SceneController = require('app/SceneController');
+
+    // APP
+    var GridScene        = require('app/scenes/GridScene');
+
+    var mainCtx = Engine.createContext();
+    mainCtx.setPerspective( 1000 );
+
+    SceneController.addScenes({
+        'grid': GridScene
+    }); 
+    SceneController.setScene('grid');
+
+    mainCtx.add( SceneController );
+ 
+});
+</script>
+</body>
+</html>

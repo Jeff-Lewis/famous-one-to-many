@@ -1,0 +1,162 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; } /* HTML5 display-role reset for older browsers */ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; } body { line-height: 1; } ol, ul { list-style: none; } blockquote, q { quotes: none; } blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; } table { border-collapse: collapse; border-spacing: 0; }
+
+* { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box; 
+}
+
+html                { 
+                      font-size: 18px; 
+                      background-color: #303637; 
+                    } 
+
+.panel-background, .description-panel {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.label
+{
+	font-family: 'Avenir Next W10 Medium', sans-serif;	
+	color: rgba(255,255,255,1.0);
+    border-bottom: 1px solid white;
+}
+
+.slider-label {					
+	font-family: 'Avenir Next W10 Thin', sans-serif;	
+  font-weight: 200;
+	color: rgba(255,255,255,1.0);
+}
+
+.slider-back {
+	background-color: rgba(0,0,0,.5);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.slider-fill {
+	background-color: rgba(255,255,255,0.8);
+}
+.slider-value {
+	font-family: 'Avenir Next W10 Medium', sans-serif;	
+    color: rgba(172,234,255,1);
+}
+.settings-save { 
+	  font-family: 'Avenir Next W10 Bold', sans-serif;	
+    color: rgba(172,234,255,1);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #2a2933;
+    border-top: 2px solid #7bd0db;
+    border-left: 2px solid #7bd0db;
+    border-right: 2px solid #7bd0db;
+    
+}
+
+.settings-save-button { 
+	font-family: 'Avenir Next W10 Bold', sans-serif;	
+    background-color: #6cce3e;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.settings-clear { 
+	font-family: 'Avenir Next W10 Bold', sans-serif;	
+    color: rgba(255, 255, 255, 1);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #eb704f;
+}
+
+.no-user-select { 
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+h1, h2, h3 { 
+    font-family: 'Avenir Next W10 Bold';
+    font-size: 18px;
+    color: white;
+}
+h4, h5, h6 { 
+    font-family: 'Avenir Next W01 Thin';
+}
+p { 
+    font-size: 14px;
+    font-family: 'Avenir Next W10 Medium';
+    color: white;
+}
+
+.backface-visible { 
+    backface-visibility:visible;
+    -webkit-backface-visibility:visible; 
+    -moz-backface-visibility:visible; 
+    -ms-backface-visibility:visible;
+}
+
+//CORE UI
+
+.core-nextDescription a {
+    color: #ffffff;
+    line-height: 18px;
+}
+.core-next-demo { 
+    font-size: 12px;
+    color: #ccc;
+    font-family: 'Avenir Next W10 Medium';   
+}
+.core-next-name { 
+    color: #ffffff;
+    font-family: 'Avenir Next W10 Medium';   
+}
+.core-error { 
+    font-family: 'Avenir Next W10 Medium';   
+}
+
+.textinput
+{        
+    height:40px; 
+    width:100%; 
+    padding-left: 6px;     
+    padding-top: 0px;     
+    color: rgba(255, 255, 255, .750);
+    font-size: 24px; 
+    font-family: 'Avenir Next W10 Thin';
+    background-color:rgba(0, 0, 0, 0.0); 
+    border: 1px solid rgba(255, 255, 255, .750);   
+    outline-width: 0px;
+}
+
+.textinput:focus
+{
+    color: rgba(255, 255, 255, 1.0);
+    border: 1px solid rgba(255, 255, 255, 1.0);   
+    outline-width: 0px;    
+}
+
+.submit
+{
+    padding-top: 9px;
+    padding-left: 4px;
+    line-height: 24px;
+    font-size: 24px; 
+    font-family: 'Avenir Next W10 Thin';   
+}
+.textinput { 
+     background-color: #222; 
+}
