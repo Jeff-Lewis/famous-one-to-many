@@ -27,7 +27,7 @@ define(
 		"app/UI", 
 		"core/Interface"
 	], 
-	function (t, i, e) 
+	function (require, exports, module)
 	{
         function GridScene()
         {
@@ -121,35 +121,35 @@ define(
             this.events();
         }
 
-        t("famous/Matrix");
+        require("famous/Matrix");
 
-        var Modifier = t("famous/Modifier");
-        var Engine = t("famous/Engine");
+        var Modifier = require("famous/Modifier");
+        var Engine = require("famous/Engine");
 
-        t("famous/Utility");
-        t("famous/ImageSurface");
-        t("famous/Surface");
-        t("famous-animation/RegisterEasing");
+        require("famous/Utility");
+        require("famous/ImageSurface");
+        require("famous/Surface");
+        require("famous-animation/RegisterEasing");
 
-        var EventArbiter = t("famous/EventArbiter");
-        var Scene = t("famous-scene/Scene");
-        var Utils = t("famous-utils/Utils");
+        var EventArbiter = require("famous/EventArbiter");
+        var Scene = require("famous-scene/Scene");
+        var Utils = require("famous-utils/Utils");
 
-        t("famous-utils/Time");
-        t("famous-color/ColorPalette");
-        t("famous-color/Color");
-        t("famous-ui/Text/Label");
-        t("famous-ui/AutoUI");
+        require("famous-utils/Time");
+        require("famous-color/ColorPalette");
+        require("famous-color/Color");
+        require("famous-ui/Text/Label");
+        require("famous-ui/AutoUI");
 
-        var PanelScrollView = t("famous-ui/PanelScrollview");
+        var PanelScrollView = require("famous-ui/PanelScrollview");
 
-        t("app/SceneController");
-        t("app/SceneTransitions");
+        require("app/SceneController");
+        require("app/SceneTransitions");
 
-        var Grid = t("app/Grid");
-        var DescriptionPanel = t("app/DescriptionPanel");
-        var UI = t("app/UI");
-        var Interface = t("core/Interface");
+        var Grid = require("app/Grid");
+        var DescriptionPanel = require("app/DescriptionPanel");
+        var UI = require("app/UI");
+        var Interface = require("core/Interface");
         var d = 0;
         var m = 1;
 
@@ -161,6 +161,7 @@ define(
         GridScene.prototype.events = function ()
         {
             Engine.pipe(this.coreUI);
+
             Engine.on(
                 "resize",
                 Utils.debounce(
@@ -195,6 +196,6 @@ define(
             this.leftPanel.setOptions(t);
         };
 
-        e.exports = GridScene;
+        module.exports = GridScene;
     }
 ); 
