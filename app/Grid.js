@@ -51,15 +51,20 @@ define(
 
             this.mainNode = new RenderNode;
 
-            this.mainTransform = new Modifier({
-                transform: this.transformPositions[this.options.defaultPosition]
-            });
+            this.mainTransform = new Modifier(
+                {
+                    transform: this.transformPositions[this.options.defaultPosition]
+                }
+            );
 
             this.node.add(this.mainTransform).link(this.mainNode);
 
             Engine.on(
                 "resize",
-                Utils.debounce(this.reflow.bind(this, void 0), 200)
+                Utils.debounce(
+                    this.reflow.bind(this, void 0),
+                    200
+                )
             );
 
             this.initSurfaces();
@@ -93,7 +98,9 @@ define(
                 e = Math.floor(t / this.options.numColumns),
                 s = .5 * -this.totalWidth,
                 o = .5 * -this.totalHeight;
-            return x = i * this.options.surfaceSize[0] + i * this.options.gutters + s, y = e * this.options.surfaceSize[1] + e * this.options.gutters + o, Matrix.translate(x, y)
+            var x = i * this.options.surfaceSize[0] + i * this.options.gutters + s;
+            var y = e * this.options.surfaceSize[1] + e * this.options.gutters + o;
+            return Matrix.translate(x, y)
         }
 
         var Matrix = require("famous/Matrix"),
@@ -161,14 +168,18 @@ define(
                 {
                     for (var e = 0; e < this.options.numDepth; e++)
                     {
-                        var surface = new Surface({
-                            size: this.options.surfaceSize
-                        });
+                        var surface = new Surface(
+                            {
+                                size: this.options.surfaceSize
+                            }
+                        );
                         this.surfaces.push(surface);
 
-                        var modifier = new Modifier({
-                            transform: Matrix.identity
-                        });
+                        var modifier = new Modifier(
+                            {
+                                transform: Matrix.identity
+                            }
+                        );
 
                         this.transforms.push(modifier);
 
@@ -206,42 +217,60 @@ define(
 
         Grid.prototype.setActive = function (t)
         {
-            this.options.active = t
+            this.options.active = t;
         };
+
         Grid.prototype.setSelected = function (t)
         {
-            1 == t && 0 == this.selected ? this.applyStyles(this.options.selectedStyle) : 1 == this.selected && this.applyStyles(this.options.style), this.selected = t
+            if (1 == t && 0 == this.selected) {
+                this.applyStyles(this.options.selectedStyle);
+            }
+            else {
+                if (1 == this.selected) {
+                    this.applyStyles(this.options.style);
+                }
+            }
+            this.selected = t;
         };
+
         Grid.prototype.setCameraTransform = function (t)
         {
-            this.mainTransform.halt(), this.mainTransform.setTransform(this.transformPositions[t], this.options.cameraTransition)
+            this.mainTransform.halt();
+            this.mainTransform.setTransform(this.transformPositions[t], this.options.cameraTransition);
         };
+
         Grid.prototype.applyStyles = function (t)
         {
             t || (t = this.options.style);
             for (var i = 0; i < this.surfaces.length; i++) Styles.applyStyle(this.surfaces[i], t)
         };
+
         Grid.prototype.setCSSProp = function (t)
         {
             for (var i = 0; i < this.surfaces.length; i++) this.surfaces[i].setProperties(t)
         };
+
         Grid.prototype.setCollapseZDepth = function (t)
         {
             this.options.collapseZDepth = t, this.transformPositions.right = Matrix.move(Matrix.rotateY(.5 * -Math.PI), [.5 * -this.surfaces.length * t, 0, -400]), this.transformPositions.left = Matrix.move(Matrix.rotateY(.5 * Math.PI), [.5 * this.surfaces.length * t, 0, -400])
         };
+
         Grid.prototype.findTotalWidth = function ()
         {
             return this.totalWidth = (this.options.numColumns - 1) * this.options.surfaceSize[0] + (this.options.numColumns - 1) * this.options.gutters, this.totalWidth;
         };
+
         Grid.prototype.findTotalHeight = function ()
         {
             return this.totalHeight = (this.options.numRows - 1) * this.options.surfaceSize[1] + (this.options.numRows - 1) * this.options.gutters, this.totalHeight;
         };
+
         Grid.prototype.collapse = function (t)
         {
             this.position = "collapse";
             this.reflow(t);
         };
+
         Grid.prototype.expand = function (t)
         {
             this.position = "expand";
