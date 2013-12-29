@@ -30,6 +30,7 @@ define(
     function (require, exports, module)
     {
         function GridScene() {
+
             Scene.apply(this, arguments);
             this.eventInput.pipe(this.eventOutput);
 
@@ -123,6 +124,7 @@ define(
         require("famous-ui/AutoUI");
 
         var PanelScrollView = require("famous-ui/PanelScrollview");
+
         require("app/SceneController");
         require("app/SceneTransitions");
 
@@ -163,7 +165,8 @@ define(
             var t = {
                 clipSize: window.innerHeight - 2 * this.padding
             };
-            this.rightPanel.setOptions(t), this.leftPanel.setOptions(t)
+            this.rightPanel.setOptions(t);
+            this.leftPanel.setOptions(t);
         };
 
         module.exports = GridScene
