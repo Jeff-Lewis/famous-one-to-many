@@ -29,27 +29,34 @@ define(
 	], 
 	function (require, exports, module)
 	{
-        function UI(t, i, e, s)
+        // options, grid, leftpanel, rightpanel
+        function UI(options, grid, leftpanel, rightpanel)
         {
             View.apply(this, arguments);
 
-            this.obj = i;
-            this.leftPanel = e;
-            this.rightPanel = s;
+            this.obj = grid;
+            this.leftPanel = leftpanel;
+            this.rightPanel = rightpanel;
             this.widgets = {};
             this.settings = {};
             this.transforms = [];
             this.surfaceSize = [50, 50];
+
             this.transition = {
                 duration: 250,
                 curve: Easing.inOutBackNorm
             };
+
             this.curves = h();
+
             this.addSaveSettingsSurface();
             this.initUI();
             this.loadStoredSettings();
 
-            Engine.on("resize", Utils.debounce(this.reflow.bind(this), 250));
+            Engine.on(
+                "resize",
+                Utils.debounce(this.reflow.bind(this), 250)
+            );
 
             Engine.on("keyup", function (t)
             {
@@ -57,14 +64,22 @@ define(
             }.bind(this));
         }
 
-        function o(t, i) {
+        function o(t, i)
+        {
             for (var e = this.transforms.length, s = 0; e--;) t.call(this, e, s, i), s++
         }
 
-        function n() {
-            r.call(this, "down", function () {
-                this.clearSavedSettings(), this.addSaveSettingsSurface()
-            }.bind(this))
+        function n()
+        {
+            r.call(
+                this,
+                "down",
+                function ()
+                {
+                    this.clearSavedSettings();
+                    this.addSaveSettingsSurface();
+                }.bind(this)
+            );
         }
 
         function r(t, i) {
@@ -86,10 +101,21 @@ define(
         }
 
         function h() {
-            for (var t = /norm/gi, i = u(Easing).filter(function (i) {
-                    return t.test(i)
-                }).sort(), e = [], s = 0; s < i.length; s++) e.push(Easing[i[s]]);
-            return e
+            var curves = [];
+            for (var t = /norm/gi,
+                     i = u(Easing).filter(
+                        function (i)
+                        {
+                            return t.test(i)
+                        }
+                     ).sort(),
+                     s = 0;
+                 s < i.length;
+                 s++)
+            {
+                curves.push(Easing[i[s]]);
+            }
+            return curves;
         }
 
         function u(t) {
@@ -401,7 +427,10 @@ define(
         UI.prototype.saveSettings = function ()
         {
             this.saveCurrentSettings();
-            1 == this.transforms.length && this.addClearSettingsSurface();
+            if (1 == this.transforms.length) {
+                this.addClearSettingsSurface();
+            }
+
             this.createSettingsSurface(!0);
             localStorage.setItem("famoDiscrete", JSON.stringify(this.settings));
         };
@@ -476,7 +505,7 @@ define(
 
         UI.prototype.createSettingsSurface = function (t)
         {
-            var i = new Surface({
+            var settingsSurface = new Surface({
                 size: this.surfaceSize,
                 content: UI.numSaved - 1 + "",
                 properties: {
@@ -490,20 +519,27 @@ define(
                 transform: Matrix.translate(.5 * window.innerWidth, window.innerHeight + this.surfaceSize[1])
             });
 
-            this.transforms.push(e), i.on("click", function (t, i)
-            {
-                this.setSettings(i);
-                var e = Matrix.getTranslate(t.getFinalTransform());
-                t.setTransform(Matrix.translate(e[0], e[1] - 40, 0));
-                t.setTransform(Matrix.translate(e[0], e[1], 0), {
-                    curve: Easing.outBounceNorm,
-                    duration: 400
-                });
+            this.transforms.push(e);
+
+            settingsSurface.on(
+                "click",
+                function (t, i)
+                {
+                    this.setSettings(i);
+                    var e = Matrix.getTranslate(t.getFinalTransform());
+                    t.setTransform(Matrix.translate(e[0], e[1] - 40, 0));
+                    t.setTransform(
+                        Matrix.translate(e[0], e[1], 0),
+                        {
+                            curve: Easing.outBounceNorm,
+                            duration: 400
+                        }
+                    );
             }.bind(this, e, this.transforms.length - 3));
 
-            this.node.add(e).link(i);
+            this.node.add(e).link(settingsSurface);
 
-            t && this.animateAddSurface(i);
+            t && this.animateAddSurface(settingsSurface);
         };
 
         UI.prototype.animateAddSurface = function ()
@@ -527,6 +563,7 @@ define(
                 o.halt(), Time.setTimeout(o.setTransform.bind(o, r, this.transition), 50 * s)
             }
         };
+
         module.exports = UI;
     }
 ); 
